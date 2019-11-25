@@ -68,6 +68,14 @@ config_setting(
 )
 
 config_setting(
+    name = "intellij-ue-canary-mac",
+    values = {
+        "cpu": "darwin_x86_64",
+        "define": "ij_product=intellij-ue-canary",
+    },
+)
+
+config_setting(
     name = "intellij-2019.2",
     values = {
         "define": "ij_product=intellij-2019.2",
@@ -318,12 +326,32 @@ java_library(
 )
 
 java_library(
+    name = "failureaccess",
+    testonly = True,
+    exports = select_from_plugin_api_directory(
+        android_studio = [":failureaccess"],
+        clion = [":failureaccess"],
+        intellij = [":failureaccess"],
+    ),
+)
+
+java_library(
     name = "guava_for_external_binaries",
     visibility = ["//aspect/tools:__pkg__"],
     exports = select_from_plugin_api_directory(
         android_studio = [":guava"],
         clion = [":guava"],
         intellij = [":guava"],
+    ),
+)
+
+java_library(
+    name = "failureaccess_for_external_binaries",
+    visibility = ["//aspect/tools:__pkg__"],
+    exports = select_from_plugin_api_directory(
+        android_studio = [":failureaccess"],
+        clion = [":failureaccess"],
+        intellij = [":failureaccess"],
     ),
 )
 

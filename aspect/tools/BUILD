@@ -16,10 +16,17 @@ java_library(
 )
 
 java_library(
+    name = "failureaccess",
+    visibility = ["//visibility:private"],
+    exports = ["//intellij_platform_sdk:failureaccess_for_external_binaries"],
+)
+
+java_library(
     name = "lib",
     srcs = glob(["src/**/*.java"]),
     deps = [
         ":guava",
+        ":failureaccess",
         "//intellij_platform_sdk:jsr305",
         "//proto:proto_deps",
     ],
